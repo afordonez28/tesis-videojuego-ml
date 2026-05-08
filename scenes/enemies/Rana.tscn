@@ -57,6 +57,7 @@ size = Vector2(34, 36)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_6g8ue")
+damage = 20
 extra_speed = 50.0
 enemy_scale = 0.5
 jump_force = -50
@@ -70,10 +71,11 @@ position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_ydbqt")
 animation = &"fall"
 
-[node name="Damage" type="Area2D" parent="." unique_id=1523342902 groups=["enemy", "enemy_damage"]]
+[node name="DamageArea" type="Area2D" parent="." unique_id=1523342902 groups=["enemy", "enemy_damage"]]
 collision_layer = 2
+collision_mask = 65
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage" unique_id=421715149]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=421715149]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_6g8ue")
 
@@ -83,6 +85,7 @@ wait_time = 0.6
 [node name="Hurtbox" type="Area2D" parent="." unique_id=699525470]
 visibility_layer = 4
 collision_layer = 2
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=612209473]
 position = Vector2(0, -18)
@@ -100,8 +103,8 @@ texture = ExtResource("4_jqeqc")
 
 [node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=2138713778]
 
-[connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]
-[connection signal="body_exited" from="Damage" to="." method="_on_damage_body_exited"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_body_entered"]
+[connection signal="body_exited" from="DamageArea" to="." method="_on_damage_body_exited"]
 [connection signal="timeout" from="Timer_damage" to="." method="_on_timer_damage_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

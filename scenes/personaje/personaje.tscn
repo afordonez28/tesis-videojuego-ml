@@ -4,15 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://dj00r6cpq3a0h" path="res://Assets/Pixel/Personaje/run.png" id="2_auoqv"]
 [ext_resource type="Texture2D" uid="uid://dynqdyi1qcshf" path="res://Assets/Pixel/Personaje/die.png" id="2_b1pmb"]
 [ext_resource type="Texture2D" uid="uid://c4ojswakqg64d" path="res://Assets/Pixel/Personaje/jump.png" id="2_hrhk4"]
+[ext_resource type="PackedScene" uid="uid://b17gt0vvkm7jb" path="res://scenes/Defensas/defense_base.tscn" id="2_yub3r"]
 [ext_resource type="Texture2D" uid="uid://1hg1hafr8ugf" path="res://Assets/Pixel/Personaje/static.png" id="3_hrhk4"]
 [ext_resource type="Texture2D" uid="uid://de8yswcl748v5" path="res://Assets/Pixel/Personaje/reset.png" id="4_b1pmb"]
+[ext_resource type="Texture2D" uid="uid://mvmsp3w81frn" path="res://Assets/Recursos/items/damage.png" id="5_k5wo3"]
 [ext_resource type="Texture2D" uid="uid://bqm1ubspn6i7t" path="res://Assets/personaje1/axe.png" id="5_xv7wn"]
 [ext_resource type="Texture2D" uid="uid://c5wqevmdhtoc4" path="res://Assets/personaje1/pickake.png" id="6_fjtsy"]
+[ext_resource type="Texture2D" uid="uid://xseae4obsksf" path="res://Assets/Recursos/items/speed.png" id="6_yub3r"]
 [ext_resource type="Texture2D" uid="uid://ba2yp8uhsuxk4" path="res://Assets/Pixel/Personaje/lifebar-clear.png" id="7_4w6sy"]
 [ext_resource type="Texture2D" uid="uid://bllmjvs8rg715" path="res://Assets/Pixel/Personaje/lifebarbase.png" id="8_ink26"]
 [ext_resource type="Texture2D" uid="uid://b1dkc1dnggcpm" path="res://Assets/personaje1/character-spritesheet.png" id="8_wwwmy"]
 [ext_resource type="Texture2D" uid="uid://i8fh7sqqag07" path="res://Assets/Pixel/Personaje/Lifebar.png" id="9_rirxc"]
 [ext_resource type="PackedScene" uid="uid://glhnydqnb0yn" path="res://scenes/inventario/Inventory.tscn" id="10_ink26"]
+[ext_resource type="Texture2D" uid="uid://ddqiilm36826n" path="res://Assets/personaje1/hammer.png" id="11_wmy6s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kx7u"]
 atlas = ExtResource("5_xv7wn")
@@ -165,6 +169,30 @@ region = Rect2(210, 1868, 29, 49)
 [sub_resource type="AtlasTexture" id="AtlasTexture_msaii"]
 atlas = ExtResource("8_wwwmy")
 region = Rect2(274, 1868, 29, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfstr"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(53, 3886, 37, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074j6"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(183, 3886, 44, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gwb5"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(302, 3886, 37, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yphif"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(433, 3886, 37, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6klun"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(562, 3886, 44, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c85d4"]
+atlas = ExtResource("11_wmy6s")
+region = Rect2(692, 3886, 37, 47)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjtsy"]
 atlas = ExtResource("8_wwwmy")
@@ -396,6 +424,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nfstr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074j6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gwb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yphif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6klun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c85d4")
+}],
+"loop": false,
+"name": &"hammer",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fjtsy")
 }, {
 "duration": 1.0,
@@ -512,49 +563,90 @@ size = Vector2(10, 23.122448)
 size = Vector2(8, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ink26"]
-size = Vector2(46.5, 33)
+size = Vector2(69, 33)
 
 [node name="Player" type="CharacterBody2D" unique_id=164165333 groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_xvalt")
+defense_scene = ExtResource("2_yub3r")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=72945100 groups=["enemy"]]
-offset_left = -211.0
-offset_top = -197.0
-offset_right = -147.0
-offset_bottom = -157.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-value = 100.0
-texture_under = ExtResource("7_4w6sy")
-texture_over = ExtResource("8_ink26")
-texture_progress = ExtResource("9_rirxc")
+[node name="UI" type="CanvasLayer" parent="." unique_id=1524177105]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=22189470]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer" unique_id=68802845]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="DamageRow" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=1641853218]
+layout_mode = 2
+
+[node name="IconDamage" type="TextureRect" parent="UI/VBoxContainer/DamageRow" unique_id=2000777530]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5_k5wo3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DamageLabel" type="Label" parent="UI/VBoxContainer/DamageRow" unique_id=1688320489]
+layout_mode = 2
+
+[node name="SpeedRow" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=1920212738]
+layout_mode = 2
+
+[node name="IconSpeed" type="TextureRect" parent="UI/VBoxContainer/SpeedRow" unique_id=1180255131]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("6_yub3r")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SpeedLabel" type="Label" parent="UI/VBoxContainer/SpeedRow" unique_id=1635681348]
+layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2137276885]
 position = Vector2(-3, -7)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_f8plh")
-animation = &"attack_sword"
+animation = &"hammer"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=152850756]
 position = Vector2(-3, -7.4387755)
 shape = SubResource("RectangleShape2D_4e5bt")
 
 [node name="damage" type="Area2D" parent="." unique_id=1687809002 groups=["player"]]
-collision_mask = 6
+collision_mask = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage" unique_id=562123924 groups=["player"]]
 position = Vector2(-3, -7)
 shape = SubResource("RectangleShape2D_4w6sy")
 
 [node name="hitbox" type="Area2D" parent="." unique_id=1956905162]
-collision_mask = 18
+collision_mask = 82
 
 [node name="Dar daño" type="CollisionShape2D" parent="hitbox" unique_id=1842709642]
-position = Vector2(10, -12)
+position = Vector2(8.5, -12)
 shape = SubResource("RectangleShape2D_ink26")
 
 [node name="Inventory" parent="." unique_id=1070704130 instance=ExtResource("10_ink26")]
+
+[node name="UI2" type="CanvasLayer" parent="." unique_id=1864779918]
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI2" unique_id=2133044275 groups=["enemy"]]
+custom_minimum_size = Vector2(25, 50)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource("7_4w6sy")
+texture_over = ExtResource("8_ink26")
+texture_progress = ExtResource("9_rirxc")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="damage" to="." method="_on_damage_body_entered"]

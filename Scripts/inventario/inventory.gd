@@ -17,3 +17,6 @@ func add_item(item_type: String, amount: int = 1):
 func update_ui():
 	wood_label.text = "x " + str(inventory.get("wood", 0))
 	stone_label.text = "x " + str(inventory.get("stone", 0))
+
+func _ready():
+	add_to_group("inventory")

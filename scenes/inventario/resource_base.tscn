@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx4e00ghwdi4v"]
+[gd_scene format=3 uid="uid://dx4e00ghwdi4v"]
 
 [sub_resource type="GDScript" id="GDScript_7m0j1"]
 script/source = "extends Node2D
@@ -14,29 +14,34 @@ func _ready():
 	add_to_group(\"resource\")
 
 func take_damage_tool(damage, tool_name):
+	
 	if tool_name != required_tool:
 		print(\"Herramienta incorrecta\")
 		return
 	
 	health -= damage
-	print(\"Recurso golpeado:\", health)	
+	print(\"Recurso golpeado:\", health)
+	
 	if health <= 0:
 		drop_resource()
 		queue_free()
 
+# 🔥 ENTREGA RECURSO AL PLAYER
 func drop_resource():
-	print(\"Dropping:\", resource_type)
-	# luego aquí instancias ítems (madera/piedra)
+	var inventory = get_tree().get_first_node_in_group(\"inventory\")
+	
+	if inventory:
+		inventory.add_item(resource_type, 1)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xvgd"]
 
-[node name="ResourceBase" type="Node2D"]
+[node name="ResourceBase" type="Node2D" unique_id=1838385042]
 script = SubResource("GDScript_7m0j1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1136407539]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=523069928]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1415342958]
 shape = SubResource("RectangleShape2D_5xvgd")

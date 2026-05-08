@@ -89,7 +89,7 @@ func take_damage(damage):
 # FLASH BLANCO
 # -----------------------
 func flash_hit():
-	sprite.modulate = Color(2, 2, 2) # blanco fuerte
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0) # blanco fuerte
 	
 	await get_tree().create_timer(0.1).timeout
 	
