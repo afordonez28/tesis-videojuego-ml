@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://u5gegqpn2ptq"]
+
+[ext_resource type="Texture2D" uid="uid://ba7vejtj5txqg" path="res://Assets/Pixel/Esqueleto/esqueleto.png" id="1_nbgii"]
+[ext_resource type="Script" uid="uid://iclpmqdvj8mj" path="res://Scripts/enemies/floor/skeleton.gd" id="1_xt4x6"]
+[ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="2_xt4x6"]
+[ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="3_05nri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owfsc"]
+size = Vector2(20, 32.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swoyg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nbgii")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nbgii")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk5js"]
+size = Vector2(22, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fi2il"]
+size = Vector2(34, 36)
+
+[node name="Skeleton" type="CharacterBody2D" unique_id=1015055007]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xt4x6")
+speed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1655393834 groups=["enemy"]]
+position = Vector2(0, -17.25)
+shape = SubResource("RectangleShape2D_owfsc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2056955324]
+position = Vector2(-0.81249785, -18.437498)
+scale = Vector2(0.10229493, 0.101806656)
+sprite_frames = SubResource("SpriteFrames_swoyg")
+animation = &"run"
+
+[node name="Damage" type="Area2D" parent="." unique_id=1287157829 groups=["enemy", "enemy_damage"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage" unique_id=317534518]
+position = Vector2(0, -17.5)
+shape = SubResource("RectangleShape2D_sk5js")
+
+[node name="Timer_damage" type="Timer" parent="." unique_id=1806080957]
+wait_time = 0.6
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=311732199]
+visibility_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=862206053]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_fi2il")
+
+[node name="HealthBar" type="Node2D" parent="." unique_id=1079975554]
+
+[node name="BarEmpty" type="Sprite2D" parent="HealthBar" unique_id=583486266]
+position = Vector2(0.5, -25.500002)
+scale = Vector2(0.49218747, 0.796875)
+texture = ExtResource("2_xt4x6")
+
+[node name="BarFill" type="Sprite2D" parent="HealthBar" unique_id=699810862]
+position = Vector2(0.4999981, -27.5)
+scale = Vector2(0.4921875, 0.6875)
+texture = ExtResource("3_05nri")
+
+[node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=1486062427]
+
+[connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]
+[connection signal="body_exited" from="Damage" to="." method="_on_damage_body_exited"]
+[connection signal="timeout" from="Timer_damage" to="." method="_on_timer_damage_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

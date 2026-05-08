@@ -221,6 +221,9 @@ func dead():
 	if not is_dead:
 		play_anim("die")
 	is_dead = true
+	#🔥 GUARDAR MÉTRICAS
+	MetricsManager.save_metrics()
+	print("guardando metricas")
 
 func reset():
 	sprite.position.y = -18

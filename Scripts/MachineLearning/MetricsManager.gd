@@ -1,112 +1,91 @@
-extends CharacterBody2D
+extends Node
 
-@export var speed: float = 50
-@export var gravity: float = 500
-@export var max_health: int = 100
+# 📊 MÉTRICAS
+var survival_time: float = 0.0
+var enemies_killed: int = 0
+var damage_taken: int = 0
+var resources_collected: int = 0
+var level_reached: int = 1
 
-var health: int
+var last_combat_time: float = 0.0
+var combat_intervals: Array = []
+var in_combat: bool = false
 
-@onready var player = null
-@onready var sprite = $AnimatedSprite2D
 
-# UI
-@onready var bar_fill = $HealthBar/BarFill
-@onready var damage_spawner = $DamageNumberSpawner
-
-@export var damage_number_scene: PackedScene
+# 🔢 contador de archivos
+var file_index: int = 1
 
 
 func _ready():
-	add_to_group("enemy")
-	$Hurtbox.add_to_group("enemy_hurtbox")
-
-	player = find_nearest_player()
-	health = max_health
+	# 🔥 Mostrar ruta real al iniciar el juego
+	print("📁 Ruta real de guardado:")
+	print(OS.get_user_data_dir())
 	
-	update_health_bar()
+	# 🔍 Buscar el siguiente número disponible
+	file_index = get_next_file_index()
 
 
-func apply_gravity(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
+func _process(delta):
+	survival_time += delta
 
 
-func face_player():
-	if player == null:
-		return
-
-	sprite.flip_h = player.global_position.x < global_position.x
-
-
-func find_nearest_player():
-	var players = get_tree().get_nodes_in_group("player")
-
-	if players.is_empty():
-		return null
-
-	var nearest = players[0]
-	var min_dist = global_position.distance_to(nearest.global_position)
-
-	for p in players:
-		var dist = global_position.distance_to(p.global_position)
-		if dist < min_dist:
-			min_dist = dist
-			nearest = p
-
-	return nearest
-
-
-# 🔥 RECIBIR DAÑO
-func take_damage(damage):
-	health -= damage
+# 🔍 BUSCAR SIGUIENTE NÚMERO DISPONIBLE
+func get_next_file_index():
+	var dir = DirAccess.open("user://")
+	if dir == null:
+		return 1
 	
-	# 📊 MÉTRICAS → empieza combate
-	MetricsManager.register_combat_start()
+	var index = 1
 	
-	show_damage_number(damage)
-	flash_hit()
-	update_health_bar()
-
-	if health <= 0:
-		die()
-
-
-# ❤️ BARRA DE VIDA
-func update_health_bar():
-	var ratio = float(health) / float(max_health)
-	bar_fill.scale.x = ratio
+	while true:
+		var file_name = "metrics" + str(index) + ".json"
+		
+		if not dir.file_exists(file_name):
+			return index
+		
+		index += 1
 
 
-# 🔴 EFECTO GOLPE
-func flash_hit():
-	sprite.modulate = Color(1, 0.3, 0.3)
-	await get_tree().create_timer(0.1).timeout
-	sprite.modulate = Color.WHITE
-
-
-# 🔢 NUMERO DE DAÑO
-func show_damage_number(damage):
-	if damage_number_scene == null:
-		return
+# 💾 GUARDAR MÉTRICAS
+func save_metrics():
+	var file_name = "metrics" + str(file_index) + ".json"
+	var path = "user://" + file_name
 	
-	var number = damage_number_scene.instantiate()
-	number.text = str(damage)
-	number.global_position = global_position + Vector2(0, -40)
+	var file = FileAccess.open(path, FileAccess.WRITE)
 	
-	get_parent().add_child(number)
+	if file:
+		file.store_string(JSON.stringify(get_metrics(), "\t"))
+		file.close()
+		
+		print("✅ Guardado:", file_name)
+		
+		file_index += 1  # preparar el siguiente
 
 
-# 💀 MUERTE
-func die():
-	# 📊 MÉTRICAS
-	MetricsManager.enemies_killed += 1
-	MetricsManager.register_combat_end()
-	
-	queue_free()
-	
-	
+# ⚔️ COMBATE
+func register_combat_start():
+	if not in_combat:
+		var current_time = survival_time
+		
+		if last_combat_time > 0:
+			var interval = current_time - last_combat_time
+			combat_intervals.append(interval)
+		
+		in_combat = true
 
 
-func play_anim(anim):
-	if sprite.animation != anim:
-		sprite.play(anim)
+func register_combat_end():
+	last_combat_time = survival_time
+	in_combat = false
+
+
+# 📊 OBTENER DATOS
+func get_metrics():
+	return {
+		"survival_time": survival_time,
+		"enemies_killed": enemies_killed,
+		"damage_taken": damage_taken,
+		"resources_collected": resources_collected,
+		"level_reached": level_reached,
+		"combat_intervals": combat_intervals
+	}
