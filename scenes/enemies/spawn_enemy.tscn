@@ -9,7 +9,7 @@
 [node name="spawn_enemy" type="Area2D" unique_id=384203986]
 script = ExtResource("1_efgkh")
 enemies = Array[PackedScene]([ExtResource("2_hqw4b"), ExtResource("3_84nce")])
-probabilities = Array[float]([50.0, 50.0])
+probabilities = Array[float]([10.0, 50.0])
 growth = Array[float]([0.0, 0.0])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=190106482]

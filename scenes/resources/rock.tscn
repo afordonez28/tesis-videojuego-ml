@@ -8,6 +8,8 @@
 
 [node name="rock" type="CharacterBody2D" unique_id=1517546030]
 scale = Vector2(0.1, 0.1)
+collision_layer = 16
+collision_mask = 13
 script = ExtResource("1_7qwwh")
 resource_type = "stone"
 required_tool = "pickaxe"

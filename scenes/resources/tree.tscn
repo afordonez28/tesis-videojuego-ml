@@ -8,6 +8,8 @@
 
 [node name="tree" type="CharacterBody2D" unique_id=184512990]
 scale = Vector2(0.07, 0.07)
+collision_layer = 16
+collision_mask = 13
 script = ExtResource("1_v1dci")
 drop_scene = ExtResource("2_pix6c")
 spawn_offset_y = -30.0
