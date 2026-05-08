@@ -19,6 +19,7 @@ const JUMP_VELOCITY = -250.0
 enum Tool { SWORD, PICKAXE, AXE }
 var current_tool = Tool.SWORD
 var facing_direction := 1
+var base_scale := 0.5
 
 # -----------------------
 # STATE
@@ -46,7 +47,6 @@ var health: float = 100
 func _ready():
 	add_to_group("player")
 	update_health_bar()
-	update_tool_sprite()
 
 # -----------------------
 # PHYSICS
@@ -77,7 +77,6 @@ func handle_tool_switch():
 	elif Input.is_action_just_pressed("tool_3"):
 		current_tool = Tool.AXE
 	
-	update_tool_sprite()
 
 # -----------------------
 # ATTACK
@@ -88,9 +87,9 @@ func handle_attack():
 		is_attacking = true
 		
 		play_attack_animation()
-		perform_attack()
+		await sprite.animation_finished
 		
-		await get_tree().create_timer(attack_cooldown).timeout
+		perform_attack()
 		
 		is_attacking = false
 		can_attack = true
@@ -132,17 +131,6 @@ func get_damage():
 		Tool.PICKAXE: return 1
 		Tool.AXE: return 1
 
-# -----------------------
-# TOOL SPRITE
-# -----------------------
-func update_tool_sprite():
-	match current_tool:
-		Tool.SWORD:
-			tool_sprite.texture = load("res://Assets/herramientas/espada.png")
-		Tool.PICKAXE:
-			tool_sprite.texture = load("res://Assets/herramientas/pico.png")
-		Tool.AXE:
-			tool_sprite.texture = load("res://Assets/herramientas/hacha.png")
 
 # -----------------------
 # ANIMATION
@@ -151,10 +139,18 @@ func play_attack_animation():
 	match current_tool:
 		Tool.SWORD:
 			play_anim("attack_sword")
+
 		Tool.PICKAXE:
 			play_anim("attack_pickaxe")
+
 		Tool.AXE:
 			play_anim("attack_axe")
+			
+			sprite.position.y = -13
+			
+			await sprite.animation_finished
+			
+			sprite.position.y = -7
 
 func play_anim(anim):
 	if sprite.animation != anim:
@@ -170,10 +166,10 @@ func handle_movement():
 	var direction = Input.get_axis("ia_left", "ia_right")
 	
 	if direction < 0:
-		sprite.scale.x = -1
+		sprite.scale.x = -base_scale
 		hitbox.scale.x = -1
 	elif direction > 0:
-		sprite.scale.x = 1
+		sprite.scale.x = base_scale
 		hitbox.scale.x = 1
 	
 	if direction != 0:
@@ -191,7 +187,9 @@ func handle_movement():
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		play_anim("jump")
+		
+		if sprite.animation != "jump":
+			play_anim("jump")
 
 func handle_jump():
 	if Input.is_action_just_pressed("ia_jump") and is_on_floor():

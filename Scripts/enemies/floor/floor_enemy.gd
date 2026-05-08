@@ -2,6 +2,12 @@ extends "res://Scripts/enemies/enemy_base.gd"
 
 func _physics_process(delta):
 
+	# 🔥 PRIORIDAD AL KNOCKBACK
+	if is_knockback:
+		apply_gravity(delta)
+		move_and_slide()
+		return
+
 	apply_gravity(delta)
 
 	if player and is_instance_valid(player):

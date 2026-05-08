@@ -66,7 +66,6 @@ func save_metrics():
 func register_combat_start():
 	if not in_combat:
 		var current_time = survival_time
-		
 		if last_combat_time > 0:
 			var interval = current_time - last_combat_time
 			combat_intervals.append(interval)

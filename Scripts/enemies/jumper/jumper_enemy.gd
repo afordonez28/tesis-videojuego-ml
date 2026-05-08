@@ -1,14 +1,24 @@
 extends "res://Scripts/enemies/enemy_base.gd"
 
 @export var jump_force = -250
-@export var jump_interval = 0.8
+@export var jump_interval: float = 0.8
 
-var jump_timer = 0.0
+var jump_timer: float = 0.0
+
+
 
 
 func _physics_process(delta):
 
+	if is_knockback:
+		apply_gravity(delta)
+		move_and_slide()
+		return
+
 	apply_gravity(delta)
+
+	# 🔥 SIEMPRE ACTUALIZA EL TIMER
+	jump_timer -= delta
 
 	if player and is_instance_valid(player):
 
@@ -28,10 +38,7 @@ func _physics_process(delta):
 			velocity.x = 0
 			play_anim("static")
 
-		jump_timer -= delta
-
 		if is_on_floor() and jump_timer <= 0:
-
 			velocity.y = jump_force
 			jump_timer = jump_interval
 
