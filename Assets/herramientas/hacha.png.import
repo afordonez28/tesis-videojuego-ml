@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnr2x1mtger2q"
-path="res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"
+uid="uid://d3nckb7xh0uop"
+path="res://.godot/imported/hacha.png-68bfcf4f109f1b2583283df48c204633.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Recursos/piedra.png"
-dest_files=["res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"]
+source_file="res://Assets/herramientas/hacha.png"
+dest_files=["res://.godot/imported/hacha.png-68bfcf4f109f1b2583283df48c204633.ctex"]
 
 [params]
 

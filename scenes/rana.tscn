@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qnvfejiiw0gt"]
+[gd_scene load_steps=10 format=3 uid="uid://qnvfejiiw0gt"]
 
 [ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
@@ -48,6 +48,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g8ue"]
 size = Vector2(22, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_midvy"]
+
 [node name="Rana" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 5
@@ -73,6 +75,13 @@ shape = SubResource("RectangleShape2D_6g8ue")
 
 [node name="Timer_damage" type="Timer" parent="."]
 wait_time = 0.6
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visibility_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_midvy")
 
 [connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]
 [connection signal="body_exited" from="Damage" to="." method="_on_damage_body_exited"]

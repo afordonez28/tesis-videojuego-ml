@@ -60,13 +60,13 @@ func _recalculate_time():
 	var total_minutes = int(time / INGAME_TO_REAL_MINUTE_DURATION)
 
 	# 🔥 DÍA
-	current_day = int(total_minutes / MINUTES_PER_DAY)
+	current_day = int(total_minutes / float(MINUTES_PER_DAY))
 
 	# 🔥 MINUTOS DEL DÍA ACTUAL
 	var current_day_minutes = total_minutes % MINUTES_PER_DAY
 
 	# 🔥 HORA Y MINUTO
-	current_hour = int(current_day_minutes / MINUTES_PER_HOUR)
+	current_hour = int(current_day_minutes / float(MINUTES_PER_HOUR))
 	current_minute = int(current_day_minutes % MINUTES_PER_HOUR)
 
 	# 🔔 SEÑAL (solo cuando cambia el minuto)

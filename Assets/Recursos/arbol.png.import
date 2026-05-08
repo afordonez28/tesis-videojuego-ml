@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnr2x1mtger2q"
-path="res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"
+uid="uid://ds4ri3dghvea4"
+path="res://.godot/imported/arbol.png-09aeb222c6a7720f4947296bc55e0f0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Recursos/piedra.png"
-dest_files=["res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"]
+source_file="res://Assets/Recursos/arbol.png"
+dest_files=["res://.godot/imported/arbol.png-09aeb222c6a7720f4947296bc55e0f0d.ctex"]
 
 [params]
 

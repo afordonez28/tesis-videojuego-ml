@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnr2x1mtger2q"
-path="res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"
+uid="uid://kvv7ngr1crcn"
+path="res://.godot/imported/roca.png-9af99cbd3d664289ed9b3f2ba18b269b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Recursos/piedra.png"
-dest_files=["res://.godot/imported/piedra.png-8ca410ad971ce031bb80b31c7d48634f.ctex"]
+source_file="res://Assets/Recursos/roca.png"
+dest_files=["res://.godot/imported/roca.png-9af99cbd3d664289ed9b3f2ba18b269b.ctex"]
 
 [params]
 
