@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://d1fgroqot3ne7"]
+
+[ext_resource type="Script" uid="uid://dsx6d1na2ootx" path="res://Scripts/personaje/Inventario/InventoryUI.gd" id="1_nuild"]
+[ext_resource type="Texture2D" uid="uid://bujistvwdexk" path="res://Assets/Inventario/fondo_inventory.png" id="1_wqexf"]
+[ext_resource type="PackedScene" uid="uid://dnd6i3nro3jay" path="res://scenes/Inventario/SlotUI.tscn" id="3_lodd8"]
+
+[node name="InventoryUI" type="CanvasLayer" unique_id=571377800]
+script = ExtResource("1_nuild")
+
+[node name="Control" type="Control" parent="." unique_id=1503424229]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=833227830]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wqexf")
+stretch_mode = 5
+
+[node name="BigInventory" type="Panel" parent="Control/TextureRect" unique_id=1433658836]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="inventory_grid" type="GridContainer" parent="Control/TextureRect/BigInventory" unique_id=626943779]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 10
+
+[node name="ArmorPanel" type="VBoxContainer" parent="Control/TextureRect/BigInventory" unique_id=507501705]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Casco" parent="Control/TextureRect/BigInventory/ArmorPanel" unique_id=1446597590 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="Peto" parent="Control/TextureRect/BigInventory/ArmorPanel" unique_id=473370084 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="Botas" parent="Control/TextureRect/BigInventory/ArmorPanel" unique_id=2040574868 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="Accesorio" parent="Control/TextureRect/BigInventory/ArmorPanel" unique_id=829863861 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="PlayerView" type="TextureRect" parent="Control/TextureRect/BigInventory" unique_id=1587554006]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CraftPanel" type="HBoxContainer" parent="Control/TextureRect/BigInventory" unique_id=117144220]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CraftIn0" parent="Control/TextureRect/BigInventory/CraftPanel" unique_id=1997959658 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="AnvilIcon" type="TextureRect" parent="Control/TextureRect/BigInventory/CraftPanel" unique_id=202790758]
+layout_mode = 2
+
+[node name="CraftOut" parent="Control/TextureRect/BigInventory/CraftPanel" unique_id=287600003 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="CraftIn1" parent="Control/TextureRect/BigInventory/CraftPanel" unique_id=179241196 instance=ExtResource("3_lodd8")]
+layout_mode = 2
+
+[node name="HotbarContainer" type="HBoxContainer" parent="Control/TextureRect" unique_id=828071823]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hotbar_grid" type="HBoxContainer" parent="Control/TextureRect/HotbarContainer" unique_id=1487700166]
+layout_mode = 2

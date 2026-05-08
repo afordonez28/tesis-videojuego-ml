@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b0vyrw1qtoue5" path="res://Assets/daynightcycle-gradient-texture.tres" id="6_75jji"]
 [ext_resource type="Texture2D" uid="uid://c7rt73nenug3e" path="res://Assets/aseprite/suelo2.ase" id="6_jaeu2"]
 [ext_resource type="PackedScene" uid="uid://dis2u8buhri51" path="res://scenes/mundo1.tscn" id="6_kxyy5"]
-[ext_resource type="PackedScene" uid="uid://dyn57y5wms06s" path="res://scenes/Inventario.tscn" id="7_75jji"]
+[ext_resource type="PackedScene" uid="uid://d1fgroqot3ne7" path="res://scenes/Inventario/InventoryUI.tscn" id="7_75jji"]
 
 [sub_resource type="GDScript" id="GDScript_yi5ae"]
 
@@ -74,9 +74,7 @@ tile_set = SubResource("TileSet_kxyy5")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1445028666]
 script = ExtResource("5_vwj67")
 gradient_texture = ExtResource("6_75jji")
-INGAME_SPEED = 50.0
-INITIAL_HOUR = null
 
 [node name="mundo1" parent="." unique_id=1826917246 instance=ExtResource("6_kxyy5")]
 
-[node name="UI" parent="." unique_id=1917044693 instance=ExtResource("7_75jji")]
+[node name="InventoryUI" parent="." unique_id=571377800 instance=ExtResource("7_75jji")]

@@ -1,13 +1,20 @@
 [gd_scene format=3 uid="uid://u0r3sqavkia0"]
 
-[ext_resource type="Script" uid="uid://dm7of4ky5t41c" path="res://scenes/Item.gd" id="1_dxvxp"]
+[sub_resource type="GDScript" id="GDScript_ehbky"]
+script/source = "extends Resource
+
+@export var name: String
+@export var icon: Texture2D
+@export var type: String  # weapon, axe, pickaxe, material
+@export var amount: int = 1
+"
 
 [node name="InventorySlot(Control)" type="Control" unique_id=1229983574]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_dxvxp")
+script = SubResource("GDScript_ehbky")
 
 [node name="TextureRect(icono)" type="TextureRect" parent="." unique_id=1104494050]
 layout_mode = 0

@@ -25,6 +25,7 @@ aseprite_executable_path="C:\\Users\\ordoñesito\\Desktop\\todo\\aseprite\\libre
 [autoload]
 
 TimeManager="*uid://cxis1f12auew7"
+InventoryManager="*uid://bt6b0kg6jyr83"
 
 [display]
 

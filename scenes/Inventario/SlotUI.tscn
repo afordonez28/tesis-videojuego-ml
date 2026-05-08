@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dnd6i3nro3jay"]
+
+[ext_resource type="Script" uid="uid://blyugbkgt3wcj" path="res://Scripts/personaje/Inventario/SlotUI.gd" id="1_3knts"]
+[ext_resource type="Texture2D" uid="uid://c0yoxykln7h7g" path="res://Assets/Inventario/slot_inventory.png" id="2_gsowb"]
+
+[node name="SlotUI" type="Panel" unique_id=1446597590]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_3knts")
+
+[node name="Background" type="TextureRect" parent="." unique_id=410241161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gsowb")
+stretch_mode = 3
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1119516984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="AmountLabel" type="Label" parent="." unique_id=140273020]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
