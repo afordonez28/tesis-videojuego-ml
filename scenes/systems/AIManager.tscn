@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://df5bsi4g2lre"]
+
+[ext_resource type="Script" uid="uid://dgcn2nv4ht7nw" path="res://Scripts/MachineLearning/AIManager.gd" id="1_nohvk"]
+
+[node name="AiManager" type="Node2D" unique_id=80148506]
+script = ExtResource("1_nohvk")

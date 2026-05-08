@@ -12,6 +12,9 @@ func add_item(item_type: String, amount: int = 1):
 	
 	inventory[item_type] += amount
 	
+	# 🔥 MÉTRICA (CLAVE)
+	MetricsManager.resources_collected += amount
+	
 	update_ui()
 
 func update_ui():

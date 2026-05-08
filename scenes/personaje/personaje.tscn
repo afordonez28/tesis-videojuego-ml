@@ -387,7 +387,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_56vgr")
 }],
-"loop": true,
+"loop": false,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -611,9 +611,7 @@ layout_mode = 2
 position = Vector2(-3, -7)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_f8plh")
-animation = &"hammer"
-frame = 5
-frame_progress = 1.0
+animation = &"die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=152850756]
 position = Vector2(-3, -7.4387755)

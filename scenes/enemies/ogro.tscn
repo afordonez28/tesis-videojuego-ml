@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ceunf6u1scf5s"]
 
 [ext_resource type="Script" uid="uid://ci0l12kma78pm" path="res://Scripts/enemies/floor/ogro.gd" id="1_6x2hh"]
+[ext_resource type="PackedScene" uid="uid://sxec84ic4qww" path="res://scenes/systems/damage_number.tscn" id="2_u7kov"]
 [ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="3_4l4wi"]
 [ext_resource type="Texture2D" uid="uid://cris8t80o1fdp" path="res://Assets/enemies/Ogro.png" id="3_u7kov"]
 [ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="4_a7vy0"]
@@ -89,9 +90,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bnk78")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
-"speed": 15.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -136,7 +137,8 @@ size = Vector2(34, 36)
 collision_layer = 2
 collision_mask = 69
 script = ExtResource("1_6x2hh")
-enemy_scale = 0.5
+max_health = 200
+damage_number_scene = ExtResource("2_u7kov")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2144720371 groups=["enemy"]]
 position = Vector2(0, -17.25)
@@ -182,6 +184,8 @@ position = Vector2(0.6249995, -25.124998)
 scale = Vector2(0.48046875, 0.71484375)
 texture = ExtResource("4_a7vy0")
 
-[node name="DamageNum" type="Node2D" parent="." unique_id=528146316]
+[node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=528146316]
+visible = false
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]

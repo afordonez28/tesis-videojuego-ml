@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dllsoxnu13lo5"]
 
 [ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
+[ext_resource type="PackedScene" uid="uid://sxec84ic4qww" path="res://scenes/systems/damage_number.tscn" id="2_jqeqc"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
 [ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="3_mfmoo"]
+[ext_resource type="Texture2D" uid="uid://c07pef8mk2ur" path="res://Assets/enemies/hit_rana.png" id="4_1dvri"]
 [ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="4_jqeqc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg371"]
@@ -11,6 +13,22 @@ size = Vector2(20, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_midvy"]
 atlas = ExtResource("2_midvy")
 region = Rect2(72, 24, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvi2r"]
+atlas = ExtResource("4_1dvri")
+region = Rect2(1, 28, 27, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2qjq"]
+atlas = ExtResource("4_1dvri")
+region = Rect2(32, 28, 27, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihjaw"]
+atlas = ExtResource("4_1dvri")
+region = Rect2(60, 28, 27, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu05q"]
+atlas = ExtResource("4_1dvri")
+region = Rect2(87, 28, 39, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tg371"]
 atlas = ExtResource("2_midvy")
@@ -26,15 +44,32 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_midvy")
 }],
-"loop": true,
+"loop": false,
 "name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mvi2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2qjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihjaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu05q")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tg371")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -42,13 +77,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6g8ue")
 }],
-"loop": true,
+"loop": false,
 "name": &"static",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g8ue"]
-size = Vector2(22, 20)
+size = Vector2(31, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_midvy"]
 size = Vector2(34, 36)
@@ -58,9 +93,10 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_6g8ue")
 damage = 20
-extra_speed = 50.0
-enemy_scale = 0.5
+extra_jump = -50.0
 jump_force = -50
+enemy_scale = 0.5
+damage_number_scene = ExtResource("2_jqeqc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926651512 groups=["enemy"]]
 position = Vector2(0, -10)
@@ -69,14 +105,14 @@ shape = SubResource("RectangleShape2D_tg371")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=525784587]
 position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_ydbqt")
-animation = &"fall"
+animation = &"hit"
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1523342902 groups=["enemy", "enemy_damage"]]
 collision_layer = 2
 collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=421715149]
-position = Vector2(0, -10)
+position = Vector2(0.5, -10)
 shape = SubResource("RectangleShape2D_6g8ue")
 
 [node name="Timer_damage" type="Timer" parent="." unique_id=794452062]
@@ -102,6 +138,7 @@ position = Vector2(0, -22)
 texture = ExtResource("4_jqeqc")
 
 [node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=2138713778]
+visible = false
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_body_exited"]

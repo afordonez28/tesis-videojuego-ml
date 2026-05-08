@@ -24,6 +24,7 @@ var base_scale := 0.5
 # STATE
 # -----------------------
 var is_dead = false
+var level_timer := 0.0
 
 # -----------------------
 # HEALTH
@@ -53,6 +54,15 @@ func _ready():
 	add_to_group("player")
 	update_health_bar()
 	update_stats_ui()
+
+
+
+func _process(delta):
+	level_timer += delta
+	
+	if level_timer >= 60: # cada 60 segundos
+		level_timer = 0
+		MetricsManager.level_reached += 1
 
 # -----------------------
 # PHYSICS
@@ -265,6 +275,9 @@ func take_damage(damage: int):
 	if is_dead:
 		return
 	
+	# 🔥 MÉTRICA
+	MetricsManager.damage_taken += damage
+	
 	health -= damage
 	health = max(health, 0)
 	update_health_bar()
@@ -281,6 +294,7 @@ func update_health_bar():
 func dead():
 	if not is_dead:
 		play_anim("die")
+		sprite.position.y = -10
 	is_dead = true
 	
 	MetricsManager.save_metrics()

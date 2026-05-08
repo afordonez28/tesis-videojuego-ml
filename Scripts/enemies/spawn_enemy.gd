@@ -42,8 +42,8 @@ func _on_respawn_timer_timeout():
 
 	if hour >= 18 or hour < 6:
 		spawn_enemy()
-	else:
-		print("Es de día, no spawnea")
+	#else:
+		#print("Es de día, no spawnea")
 
 
 # -----------------------
@@ -76,7 +76,7 @@ func spawn_enemy():
 		print("Error seleccionando enemigo")
 		return
 
-	print("Spawn:", selected_enemy.resource_path)
+	#print("Spawn:", selected_enemy.resource_path)
 
 	# 🔍 Obtener player
 	var player = get_tree().get_first_node_in_group("player")

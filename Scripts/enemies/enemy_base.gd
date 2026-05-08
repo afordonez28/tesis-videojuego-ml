@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var gravity: float = 500
 @export var max_health: int = 100
 @export var knockback_force := 150
+@export var enemy_scale: float = 1.0
+
 
 var health: int
 var is_knockback := false
@@ -14,11 +16,15 @@ var is_knockback := false
 # UI
 @onready var bar_fill = $HealthBar/BarFill
 
+# 🔥 NUEVO: spawner de números
+@onready var damage_spawner = $DamageNumberSpawner
+
 # escena número daño
 @export var damage_number_scene: PackedScene
 
 
 func _ready():
+	scale = Vector2(enemy_scale, enemy_scale)
 	add_to_group("enemy")
 	$Hurtbox.add_to_group("enemy_hurtbox")
 
@@ -89,10 +95,8 @@ func take_damage(damage):
 # FLASH BLANCO
 # -----------------------
 func flash_hit():
-	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0) # blanco fuerte
-	
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)
 	await get_tree().create_timer(0.1).timeout
-	
 	sprite.modulate = Color.WHITE
 
 
@@ -124,25 +128,44 @@ func apply_knockback():
 
 
 # -----------------------
-# NUMERO DE DAÑO
+# NUMERO DE DAÑO (ARREGLADO)
 # -----------------------
 func show_damage_number(damage):
 	if damage_number_scene == null:
 		return
 	
 	var number = damage_number_scene.instantiate()
-	number.text = str(damage)
-	number.global_position = global_position + Vector2(0, -40)
 	
-	get_parent().add_child(number)
+	# 🔥 TEXTO
+	number.text = str(damage)
+	
+	# 🎲 CRÍTICO (20% probabilidad)
+	var is_crit = randf() < 0.2
+	
+	if is_crit:
+		number.text = "CRIT " + str(damage)
+		number.modulate = Color(1, 0.2, 0.2) # rojo fuerte
+		number.is_crit = true
+	else:
+		number.modulate = Color(1, 1, 1) # blanco
+	
+	# 📍 posición
+	number.global_position = global_position + Vector2(0, -45)
+	
+	# 🎯 pequeño offset
+	number.global_position += Vector2(randf_range(-10, 10), randf_range(-5, 5))
+	
+	damage_spawner.add_child(number)
 
 
 # -----------------------
 # MUERTE
 # -----------------------
 func die():
-	# 📊 MÉTRICAS
 	MetricsManager.enemies_killed += 1
+	
+	# 🔥 TERMINA COMBATE SI NO HAY MÁS ENEMIGOS CERCA
+	MetricsManager.register_combat_end()
 	
 	queue_free()
 

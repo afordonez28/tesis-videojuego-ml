@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://iclpmqdvj8mj" path="res://Scripts/enemies/floor/skeleton.gd" id="1_xt4x6"]
 [ext_resource type="Texture2D" uid="uid://ufl1x78jp2em" path="res://Assets/enemies/esqueleto.png" id="2_05nri"]
+[ext_resource type="PackedScene" uid="uid://sxec84ic4qww" path="res://scenes/systems/damage_number.tscn" id="2_owfsc"]
 [ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="2_xt4x6"]
 [ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="3_05nri"]
 
@@ -150,11 +151,11 @@ size = Vector2(34, 36)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_xt4x6")
-damage = 20
-enemy_scale = 0.5
 speed = 100.0
 max_health = 500
 knockback_force = 300
+enemy_scale = 2.0
+damage_number_scene = ExtResource("2_owfsc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1655393834 groups=["enemy"]]
 position = Vector2(0, -17.25)
@@ -199,6 +200,7 @@ scale = Vector2(0.48046875, 0.71484375)
 texture = ExtResource("3_05nri")
 
 [node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=1486062427]
+visible = false
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_body_exited"]
