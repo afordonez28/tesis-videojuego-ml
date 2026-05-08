@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Mochila" load_steps=2 format=3 uid="uid://chxni3votsvm4"]
-
-[ext_resource type="Script" uid="uid://3pouxqwgn8ud" path="res://inventario/inventario.gd" id="1_grxbv"]
-
-[resource]
-script = ExtResource("1_grxbv")
-objetos = {}
-metadata/_custom_type_script = "uid://3pouxqwgn8ud"

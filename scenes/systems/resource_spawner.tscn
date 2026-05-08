@@ -1,11 +1,9 @@
-[gd_scene format=3 uid="uid://ctnv7dxmobcfk"]
+[gd_scene load_steps=4 format=3 uid="uid://ctnv7dxmobcfk"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1528967533]
+[ext_resource type="Script" uid="uid://dx25nq4i8iat0" path="res://Scripts/systems/resource_spawner.gd" id="1_uhj3t"]
+[ext_resource type="PackedScene" uid="uid://djbggugj70r1p" path="res://scenes/resources/tree.tscn" id="2_448i3"]
+[ext_resource type="PackedScene" uid="uid://b0m4yvmb784y5" path="res://scenes/resources/rock.tscn" id="3_vj4h4"]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=827620198]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1495760342]
-
-[node name="Area2D" type="Area2D" parent="." unique_id=555121238]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=575091968]
+[node name="Recursos" type="Node2D"]
+script = ExtResource("1_uhj3t")
+resources = Array[PackedScene]([ExtResource("2_448i3"), ExtResource("3_vj4h4")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://qnvfejiiw0gt"]
+[gd_scene format=3 uid="uid://qnvfejiiw0gt"]
 
 [ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
@@ -49,8 +49,9 @@ animations = [{
 size = Vector2(22, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_midvy"]
+size = Vector2(34, 36)
 
-[node name="Rana" type="CharacterBody2D" groups=["enemy"]]
+[node name="Rana" type="CharacterBody2D" unique_id=2102863170 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_6g8ue")
@@ -58,29 +59,29 @@ extra_speed = 50.0
 enemy_scale = 0.5
 jump_force = -50
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=853016914 groups=["enemy"]]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_tg371")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444142943]
 position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_ydbqt")
 animation = &"fall"
 
-[node name="Damage" type="Area2D" parent="." groups=["enemy", "enemy_damage"]]
+[node name="Damage" type="Area2D" parent="." unique_id=99025207 groups=["enemy", "enemy_damage"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage" unique_id=319205472]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_6g8ue")
 
-[node name="Timer_damage" type="Timer" parent="."]
+[node name="Timer_damage" type="Timer" parent="." unique_id=49541767]
 wait_time = 0.6
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=425542675]
 visibility_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -10)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1564854150]
+position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_midvy")
 
 [connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]

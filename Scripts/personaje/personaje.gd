@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 # -----------------------
-# BUG FIX / CONTROL ATAQUE
+# ATAQUE
 # -----------------------
 var attack_cooldown := 0.3
 var can_attack := true
@@ -18,10 +18,10 @@ const JUMP_VELOCITY = -250.0
 # -----------------------
 enum Tool { SWORD, PICKAXE, AXE }
 var current_tool = Tool.SWORD
-var facing_direction := 1  # 1 = derecha, -1 = izquierda
+var facing_direction := 1
 
 # -----------------------
-# PLAYER STATE
+# STATE
 # -----------------------
 var is_dead = false
 var is_attacking = false
@@ -30,7 +30,6 @@ var is_attacking = false
 # HEALTH
 # -----------------------
 @export var max_health: int = 100
-@export var health_regen: float = 2.0
 var health: float = 100
 
 # -----------------------
@@ -73,13 +72,12 @@ func _physics_process(delta):
 func handle_tool_switch():
 	if Input.is_action_just_pressed("tool_1"):
 		current_tool = Tool.SWORD
-		update_tool_sprite()
 	elif Input.is_action_just_pressed("tool_2"):
 		current_tool = Tool.PICKAXE
-		update_tool_sprite()
 	elif Input.is_action_just_pressed("tool_3"):
 		current_tool = Tool.AXE
-		update_tool_sprite()
+	
+	update_tool_sprite()
 
 # -----------------------
 # ATTACK
@@ -92,35 +90,32 @@ func handle_attack():
 		play_attack_animation()
 		perform_attack()
 		
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(attack_cooldown).timeout
 		
 		is_attacking = false
 		can_attack = true
 
 func perform_attack():
-	print("Intentando atacar...")
 	var tool_name = get_tool_name()
 	var damage_amount = get_damage()
 	
+	# 🔴 DAÑO A ENEMIGOS (AREAS)
 	for area in hitbox.get_overlapping_areas():
-		
 		if area.is_in_group("enemy_hurtbox"):
 			var enemy = area.get_parent()
-			
 			if enemy.has_method("take_damage"):
-				enemy.take_damage(get_damage())
-	
-	for body in hitbox.get_overlapping_areas():
+				enemy.take_damage(damage_amount)
+
+	# 🟢 DAÑO A CUERPOS (ENEMIGOS Y RECURSOS)
+	for body in hitbox.get_overlapping_bodies():
 		
 		if body.is_in_group("enemy"):
-			print("Golpeando enemigo:", body.name)
 			if body.has_method("take_damage"):
 				body.take_damage(damage_amount)
 		
 		elif body.is_in_group("resource"):
 			if body.has_method("take_damage_tool"):
 				body.take_damage_tool(damage_amount, tool_name)
-				
 
 # -----------------------
 # TOOL HELPERS
@@ -150,7 +145,7 @@ func update_tool_sprite():
 			tool_sprite.texture = load("res://Assets/herramientas/hacha.png")
 
 # -----------------------
-# ATTACK ANIMATION
+# ANIMATION
 # -----------------------
 func play_attack_animation():
 	match current_tool:
@@ -161,20 +156,9 @@ func play_attack_animation():
 		Tool.AXE:
 			play_anim("attack_axe")
 
-# -----------------------
-# GRAVITY
-# -----------------------
-func apply_gravity(delta):
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		play_anim("jump")
-
-# -----------------------
-# JUMP
-# -----------------------
-func handle_jump():
-	if Input.is_action_just_pressed("ia_jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+func play_anim(anim):
+	if sprite.animation != anim:
+		sprite.play(anim)
 
 # -----------------------
 # MOVEMENT
@@ -187,11 +171,10 @@ func handle_movement():
 	
 	if direction < 0:
 		sprite.scale.x = -1
-		facing_direction = -1
-		$hitbox.scale.x = -1
+		hitbox.scale.x = -1
 	elif direction > 0:
 		sprite.scale.x = 1
-		facing_direction = 1
+		hitbox.scale.x = 1
 	
 	if direction != 0:
 		velocity.x = direction * SPEED
@@ -203,21 +186,19 @@ func handle_movement():
 			play_anim("static")
 
 # -----------------------
-# ANIMATION
+# JUMP + GRAVITY
 # -----------------------
-func play_anim(anim):
-	if sprite.animation != anim:
-		sprite.play(anim)
+func apply_gravity(delta):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		play_anim("jump")
 
-# 🔥 ESTA FUNCIÓN ARREGLA EL FREEZE
-func _on_AnimatedSprite2D_animation_finished():
-	print("Animación terminó")  # 👈 DEBUG
-	
-	if is_attacking:
-		is_attacking = false
+func handle_jump():
+	if Input.is_action_just_pressed("ia_jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 # -----------------------
-# DAMAGE
+# HEALTH
 # -----------------------
 func take_damage(damage: int):
 	if is_dead:
@@ -230,23 +211,17 @@ func take_damage(damage: int):
 	if health <= 0:
 		dead()
 
-# -----------------------
-# UI
-# -----------------------
 func update_health_bar():
 	health_bar.value = health
 
 # -----------------------
-# DEAD
+# DEAD / RESET
 # -----------------------
 func dead():
 	if not is_dead:
 		play_anim("die")
 	is_dead = true
 
-# -----------------------
-# RESET
-# -----------------------
 func reset():
 	sprite.position.y = -18
 	play_anim("reset")
@@ -255,7 +230,3 @@ func reset():
 	sprite.position.y = 0
 	health = max_health
 	update_health_bar()
-
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	pass # Replace with function body.
