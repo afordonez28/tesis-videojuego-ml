@@ -3,72 +3,66 @@ extends "res://Scripts/enemies/floor/floor_enemy.gd"
 @export var damage: int = 20
 @export var damage_interval: float = 1.2
 @export var enemy_scale: float = 1.2
-@export var attack_range: float = 60.0
-
-# 🔥 comportamiento ogro (más pesado)
+@export var attack_range: float = 80.0
 @export var approach_speed_multiplier := 0.8
 
 var current_target: Node = null
-
 var is_attacking := false
-var is_chasing := true
 
-# 🔥 grupo
+# Grupo
 var group_manager = null
 var group_index := 0
 var group_size := 1
 var random_offset := 0.0
 
 @onready var damage_area = $DamageArea
-@onready var timer = $Timer_damage
 @onready var collision = $CollisionShape2D
-
 
 # -----------------------
 # READY
 # -----------------------
 func _ready():
+	
+	
 	super._ready()
-
 	group_manager = get_parent()
-
-	# 🔥 info del grupo
 	if group_manager:
 		group_index = get_index()
 		group_size = group_manager.get_child_count()
-
 	random_offset = randf_range(-20, 20)
 
-	# 🔥 SCALE (como skeleton)
 	sprite.scale = Vector2(enemy_scale, enemy_scale)
 	damage_area.scale = Vector2(enemy_scale, enemy_scale)
-
-	# ❗ NO escalar collision (rompe físicas)
-
 	sprite.position.y = -13
-		
 
-	timer.wait_time = damage_interval
-
-	damage_area.body_entered.connect(_on_body_entered)
-	damage_area.body_exited.connect(_on_body_exited)
-	timer.timeout.connect(_on_timer_timeout)
-
+	damage_area.monitoring = false
+	damage_area.body_entered.connect(_on_damage_area_hit)
+	sprite.animation_finished.connect(_on_animation_finished)
 
 # -----------------------
-# PHYSICS
+# PHYSICS — sin super para evitar que el padre pise animaciones
 # -----------------------
 func _physics_process(delta):
-	super._physics_process(delta)
-	
-	if current_target == null:
-		current_target = player
-		
-	if is_attacking:
-		velocity.x = 0
+	# Knockback heredado de enemy_base
+	if is_knockback:
+		apply_gravity(delta)
+		move_and_slide()
 		return
 
+	apply_gravity(delta)
+
 	if current_target == null:
+		current_target = player
+
+	if is_attacking:
+		velocity.x = 0
+		face_player()
+		move_and_slide()
+		return
+
+	if current_target == null or not is_instance_valid(current_target):
+		play_anim("run")
+		move_and_slide()
 		return
 
 	var dist = global_position.distance_to(current_target.global_position)
@@ -78,96 +72,69 @@ func _physics_process(delta):
 	else:
 		chase_target()
 
+	face_player()
+	move_and_slide()
 
 # -----------------------
-# PERSEGUIR (GRUPO)
+# PERSEGUIR
 # -----------------------
 func chase_target():
-
-	is_chasing = true
-
-	var spacing = 70
-
-	# 🔥 distribución en grupo
-	var offset = ((group_index - group_size / 2.0) * spacing) + random_offset
+	# Sin offset cuando hay un solo enemigo, offset reducido en grupo
+	var offset := 0.0
+	if group_size > 1:
+		var spacing = 40  # reducido de 70 a 40
+		offset = ((group_index - group_size / 2.0) * spacing) + random_offset
 
 	var target_x = current_target.global_position.x + offset
 	var dir = sign(target_x - global_position.x)
 
-	var final_speed = speed * approach_speed_multiplier
-
-	velocity.x = dir * final_speed
-
-	play_anim("run")
-
-
-# -----------------------
-# ATAQUE (COORDINADO)
-# -----------------------
-func start_attack():
-
-	if is_attacking:
-		velocity.x = 0
-		play_anim("hit")
+	# Si ya está muy cerca del target_x, no frenarlo
+	var dist_to_target_x = abs(target_x - global_position.x)
+	if dist_to_target_x < attack_range:
+		start_attack()
 		return
 
+	velocity.x = dir * (speed * approach_speed_multiplier)
+	play_anim("run")
+
+# -----------------------
+# ATAQUE
+# -----------------------
+func start_attack():
+	if is_attacking:
+		return
 	is_attacking = true
-	is_chasing = false
-
 	velocity.x = 0
-
-	# 🔥 delay por posición en grupo (se siente coordinado)
-	await get_tree().create_timer(group_index * 0.15).timeout
-
 	play_anim("hit")
-	timer.start()
-
 
 # -----------------------
-# TERMINAR ATAQUE
+# ANIMACIÓN TERMINÓ
 # -----------------------
-func stop_attack():
-
-	is_attacking = false
-	timer.stop()
-
+func _on_animation_finished():
+	if sprite.animation == "hit":
+		apply_hit_damage()
+		is_attacking = false
 
 # -----------------------
-# DETECCIÓN
+# APLICAR DAÑO
 # -----------------------
-func _on_body_entered(body):
+func apply_hit_damage():
+	if current_target and is_instance_valid(current_target):
+		var dist = global_position.distance_to(current_target.global_position)
+		if dist <= attack_range * 1.2:
+			if current_target.has_method("take_damage"):
+				current_target.take_damage(damage)
 
+# -----------------------
+# DETECCIÓN POR HITBOX (opcional, como respaldo)
+# -----------------------
+func _on_damage_area_hit(body: Node):
 	if body.is_in_group("player") or body.has_method("take_damage"):
 		current_target = body
 
-
-func _on_body_exited(body):
-
-	if body == current_target:
-		current_target = null
-
-
 # -----------------------
-# DAÑO
-# -----------------------
-func _on_timer_timeout():
-
-	if not is_attacking:
-		return
-
-	if current_target and current_target.has_method("take_damage"):
-		current_target.take_damage(damage)
-
-	stop_attack()
-
-
-# -----------------------
-# ANIMACIONES
+# ANIMACIÓN
 # -----------------------
 func play_anim(anim_name: String):
 	if sprite.animation != anim_name:
 		sprite.play(anim_name)
-
-
-func _on_damage_area_body_entered(body: Node2D) -> void:
-	print("Detectó:", body)

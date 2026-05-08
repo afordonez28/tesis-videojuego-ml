@@ -71,7 +71,7 @@ zoom = Vector2(2.3, 2.3)
 
 [node name="spawn_enemy" parent="." unique_id=705759494 instance=ExtResource("5_jaeu2")]
 enemies = Array[PackedScene]([ExtResource("4_na3uo"), ExtResource("5_fcn4g"), ExtResource("6_kegvl")])
-probabilities = Array[float]([0.0, 0.0, 20.0])
+probabilities = Array[float]([0.0, 20.0, 20.0])
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1802635232]
 position = Vector2(0, -2)

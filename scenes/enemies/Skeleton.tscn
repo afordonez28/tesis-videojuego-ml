@@ -165,8 +165,6 @@ position = Vector2(0.74999785, -17.499998)
 scale = Vector2(0.74218744, 0.7234042)
 sprite_frames = SubResource("SpriteFrames_swoyg")
 animation = &"hit"
-frame = 7
-frame_progress = 1.0
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=1287157829 groups=["enemy", "enemy_damage"]]
 collision_layer = 2

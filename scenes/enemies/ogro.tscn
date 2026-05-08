@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ceunf6u1scf5s"]
 
 [ext_resource type="Script" uid="uid://ci0l12kma78pm" path="res://Scripts/enemies/floor/ogro.gd" id="1_6x2hh"]
-[ext_resource type="Texture2D" uid="uid://ufl1x78jp2em" path="res://Assets/enemies/esqueleto.png" id="2_u7kov"]
 [ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="3_4l4wi"]
 [ext_resource type="Texture2D" uid="uid://cris8t80o1fdp" path="res://Assets/enemies/Ogro.png" id="3_u7kov"]
 [ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="4_a7vy0"]
@@ -9,37 +8,29 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7teo8"]
 size = Vector2(20, 32.5)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xt4x6"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(0, 461, 64, 47)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_05nri"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(64, 461, 64, 47)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2pfm"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(128, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(48, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3sypg"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(192, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(183, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mslgr"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(256, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(300, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rda8"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(320, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(426, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybj40"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(384, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(564, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnk78"]
-atlas = ExtResource("2_u7kov")
-region = Rect2(448, 461, 64, 47)
+atlas = ExtResource("3_u7kov")
+region = Rect2(687, 3887, 42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4l4wi"]
 atlas = ExtResource("3_u7kov")
@@ -81,12 +72,6 @@ region = Rect2(528, 723, 40, 42)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xt4x6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_05nri")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_k2pfm")
 }, {
 "duration": 1.0,
@@ -104,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bnk78")
 }],
-"loop": false,
+"loop": true,
 "name": &"hit",
 "speed": 15.0
 }, {
@@ -161,7 +146,9 @@ shape = SubResource("RectangleShape2D_7teo8")
 position = Vector2(0.74999785, -17.499998)
 scale = Vector2(0.74218744, 0.7234042)
 sprite_frames = SubResource("SpriteFrames_qqe6w")
-animation = &"run"
+animation = &"hit"
+frame = 5
+frame_progress = 1.0
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=753251185 groups=["enemy", "enemy_damage"]]
 collision_layer = 2
