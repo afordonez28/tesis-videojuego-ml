@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://djbggugj70r1p"]
+
+[ext_resource type="Script" uid="uid://bgvvyf7ihgtf7" path="res://Scripts/inventario/resources/resource_base.gd" id="1_v1dci"]
+[ext_resource type="PackedScene" uid="uid://kcg67get4rrt" path="res://scenes/inventario/items/wood_item.tscn" id="2_pix6c"]
+[ext_resource type="Texture2D" uid="uid://ds4ri3dghvea4" path="res://Assets/Recursos/recursos/tree.png" id="3_nyu3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2fbs"]
+
+[node name="tree" type="CharacterBody2D" unique_id=184512990]
+scale = Vector2(0.07, 0.07)
+script = ExtResource("1_v1dci")
+drop_scene = ExtResource("2_pix6c")
+spawn_offset_y = -30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1046757608]
+texture = ExtResource("3_nyu3d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=953628249]
+shape = SubResource("RectangleShape2D_n2fbs")

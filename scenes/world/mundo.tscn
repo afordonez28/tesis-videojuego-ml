@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://cm8fiwf76gxk5"]
 
-[ext_resource type="PackedScene" uid="uid://uek7i4gwsnin" path="res://scenes/personaje.tscn" id="1_wqn8j"]
-[ext_resource type="PackedScene" uid="uid://c7d7slqyrqcbj" path="res://scenes/spawn_enemy.tscn" id="5_jaeu2"]
+[ext_resource type="PackedScene" uid="uid://uek7i4gwsnin" path="res://scenes/personaje/personaje.tscn" id="1_wqn8j"]
+[ext_resource type="PackedScene" uid="uid://c7d7slqyrqcbj" path="res://scenes/enemies/spawn_enemy.tscn" id="5_jaeu2"]
 [ext_resource type="Script" uid="uid://ctliugar8tyon" path="res://Scripts/canvas_modulate.gd" id="5_vwj67"]
 [ext_resource type="Texture2D" uid="uid://b0vyrw1qtoue5" path="res://Assets/daynightcycle-gradient-texture.tres" id="6_75jji"]
 [ext_resource type="Texture2D" uid="uid://c7rt73nenug3e" path="res://Assets/aseprite/suelo2.ase" id="6_jaeu2"]
-[ext_resource type="PackedScene" uid="uid://dis2u8buhri51" path="res://scenes/mundo1.tscn" id="6_kxyy5"]
+[ext_resource type="PackedScene" uid="uid://dis2u8buhri51" path="res://scenes/world/mundo1.tscn" id="6_kxyy5"]
 [ext_resource type="PackedScene" uid="uid://ctnv7dxmobcfk" path="res://scenes/systems/resource_spawner.tscn" id="7_75jji"]
 
 [sub_resource type="GDScript" id="GDScript_yi5ae"]

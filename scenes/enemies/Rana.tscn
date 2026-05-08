@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://qnvfejiiw0gt"]
+[gd_scene format=3 uid="uid://dllsoxnu13lo5"]
 
 [ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
