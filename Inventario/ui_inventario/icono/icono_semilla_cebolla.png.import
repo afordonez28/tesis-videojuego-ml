@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cepeihuesv8xo"
-path="res://.godot/imported/madera.png-618065a3b521c9d6e1159b8fec133d94.ctex"
+uid="uid://cpri7oyqa1fda"
+path="res://.godot/imported/icono_semilla_cebolla.png-1b8294cde8bd442021cd3d8bc9bd72df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Recursos/madera.png"
-dest_files=["res://.godot/imported/madera.png-618065a3b521c9d6e1159b8fec133d94.ctex"]
+source_file="res://Inventario/ui_inventario/icono/icono_semilla_cebolla.png"
+dest_files=["res://.godot/imported/icono_semilla_cebolla.png-1b8294cde8bd442021cd3d8bc9bd72df.ctex"]
 
 [params]
 

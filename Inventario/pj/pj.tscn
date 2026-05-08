@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://hr0dgei6olvp"]
+
+[ext_resource type="Texture2D" uid="uid://c863vp2sepjf7" path="res://icon.svg" id="1_8k0fm"]
+[ext_resource type="Script" uid="uid://lj810dq5ri7d" path="res://pj/pj.gd" id="1_gup2v"]
+[ext_resource type="Resource" uid="uid://chxni3votsvm4" path="res://inventario/mochila.tres" id="2_31aes"]
+[ext_resource type="PackedScene" uid="uid://c4atvoan1h8no" path="res://ui_inventario/ui_inventario.tscn" id="4_h6ev2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gup2v"]
+size = Vector2(121, 123)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_gup2v")
+mochila = ExtResource("2_31aes")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(574, 271)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_8k0fm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_gup2v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("4_h6ev2")]

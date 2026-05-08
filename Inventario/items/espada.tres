@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dsnre4tvoh60l"]
+
+[ext_resource type="Script" uid="uid://c74jr0ytiovo4" path="res://items/item.gd" id="1_ox2of"]
+
+[resource]
+script = ExtResource("1_ox2of")
+nombre = ""
+apilable = true
+cantidad = 0
+max_cantidad = 99
+metadata/_custom_type_script = "uid://c74jr0ytiovo4"

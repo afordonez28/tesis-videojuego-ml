@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dx4e00ghwdi4v"]
+
+[sub_resource type="GDScript" id="GDScript_7m0j1"]
+script/source = "extends Node2D
+
+@export var max_health := 5
+@export var resource_type := \"wood\" # wood / stone
+@export var required_tool := \"axe\"  # axe / pickaxe
+
+var health := 5
+
+func _ready():
+	health = max_health
+	add_to_group(\"resource\")
+
+func take_damage_tool(damage, tool_name):
+	if tool_name != required_tool:
+		print(\"Herramienta incorrecta\")
+		return
+	
+	health -= damage
+	print(\"Recurso golpeado:\", health)	
+	if health <= 0:
+		drop_resource()
+		queue_free()
+
+func drop_resource():
+	print(\"Dropping:\", resource_type)
+	# luego aquí instancias ítems (madera/piedra)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xvgd"]
+
+[node name="ResourceBase" type="Node2D" unique_id=712548534]
+script = SubResource("GDScript_7m0j1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=587759994]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=470204204]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1089373257]
+shape = SubResource("RectangleShape2D_5xvgd")
