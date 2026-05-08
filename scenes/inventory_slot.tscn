@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://u0r3sqavkia0"]
+
+[ext_resource type="Script" uid="uid://dm7of4ky5t41c" path="res://scenes/Item.gd" id="1_dxvxp"]
+
+[node name="InventorySlot(Control)" type="Control" unique_id=1229983574]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_dxvxp")
+
+[node name="TextureRect(icono)" type="TextureRect" parent="." unique_id=1104494050]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect(fondo)" type="TextureRect" parent="." unique_id=727491805]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=1137499891]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

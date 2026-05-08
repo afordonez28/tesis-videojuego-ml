@@ -1,6 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://uek7i4gwsnin"]
+[gd_scene format=3 uid="uid://uek7i4gwsnin"]
 
-[ext_resource type="Script" uid="uid://dbgs1rgs4a80n" path="res://Scripts/personaje.gd" id="1_xvalt"]
+[ext_resource type="Script" uid="uid://dbgs1rgs4a80n" path="res://Scripts/personaje/personaje.gd" id="1_xvalt"]
 [ext_resource type="Texture2D" uid="uid://dj00r6cpq3a0h" path="res://Assets/Pixel/Personaje/run.png" id="2_auoqv"]
 [ext_resource type="Texture2D" uid="uid://dynqdyi1qcshf" path="res://Assets/Pixel/Personaje/die.png" id="2_b1pmb"]
 [ext_resource type="Texture2D" uid="uid://c4ojswakqg64d" path="res://Assets/Pixel/Personaje/jump.png" id="2_hrhk4"]
@@ -74,29 +74,6 @@ region = Rect2(46, 1, 23, 26)
 atlas = ExtResource("2_auoqv")
 region = Rect2(69, 1, 23, 26)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4w6sy"]
-load_path = "res://.godot/imported/viejito_run.png-eb191eb24b2dc8e5e3823ccef12d8d6d.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dsu68"]
-atlas = SubResource("CompressedTexture2D_4w6sy")
-region = Rect2(1, 2, 23, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ggfgw"]
-atlas = SubResource("CompressedTexture2D_4w6sy")
-region = Rect2(25, 2, 23, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5fmgk"]
-atlas = SubResource("CompressedTexture2D_4w6sy")
-region = Rect2(49, 2, 23, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cn6t8"]
-atlas = SubResource("CompressedTexture2D_4w6sy")
-region = Rect2(73, 2, 23, 29)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5yybb"]
-atlas = SubResource("CompressedTexture2D_4w6sy")
-region = Rect2(97, 2, 23, 29)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_35kqm"]
 atlas = ExtResource("3_hrhk4")
 region = Rect2(3, 3, 20, 24)
@@ -104,17 +81,6 @@ region = Rect2(3, 3, 20, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1y5k2"]
 atlas = ExtResource("3_hrhk4")
 region = Rect2(23, 3, 20, 24)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ink26"]
-load_path = "res://.godot/imported/viejito_static.png-0efa6fa766be586e14f64a68086936d1.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5rwa"]
-atlas = SubResource("CompressedTexture2D_ink26")
-region = Rect2(1, 4, 23, 27)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t0idm"]
-atlas = SubResource("CompressedTexture2D_ink26")
-region = Rect2(27, 4, 23, 27)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f8plh"]
 animations = [{
@@ -188,26 +154,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dsu68")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ggfgw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5fmgk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cn6t8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5yybb")
-}],
-"loop": true,
-"name": &"run_v",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_35kqm")
 }, {
 "duration": 1.0,
@@ -215,17 +161,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"static",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b5rwa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t0idm")
-}],
-"loop": true,
-"name": &"static_v",
 "speed": 2.0
 }]
 
@@ -235,11 +170,11 @@ size = Vector2(15, 25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w6sy"]
 size = Vector2(15, 25.2778)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1091445260 groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_xvalt")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." groups=["enemy"]]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1372617202 groups=["enemy"]]
 offset_left = -211.0
 offset_top = -197.0
 offset_right = -147.0
@@ -251,20 +186,20 @@ texture_under = ExtResource("7_4w6sy")
 texture_over = ExtResource("8_ink26")
 texture_progress = ExtResource("9_rirxc")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2041885030]
 position = Vector2(-3, 0)
 sprite_frames = SubResource("SpriteFrames_f8plh")
-animation = &"jump"
+animation = &"run"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643769826]
 position = Vector2(-0.5, 0.5)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_4e5bt")
 
-[node name="damage" type="Area2D" parent="." groups=["player"]]
+[node name="damage" type="Area2D" parent="." unique_id=278633967 groups=["player"]]
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" groups=["player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" unique_id=717356629 groups=["player"]]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_4w6sy")
 

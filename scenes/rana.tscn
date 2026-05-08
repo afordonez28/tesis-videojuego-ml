@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qnvfejiiw0gt"]
 
-[ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/rana.gd" id="1_6g8ue"]
+[ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg371"]
@@ -52,6 +52,9 @@ size = Vector2(22, 20)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_6g8ue")
+extra_speed = 50.0
+enemy_scale = 0.5
+jump_force = -50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
 position = Vector2(0, -10)
@@ -60,7 +63,7 @@ shape = SubResource("RectangleShape2D_tg371")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_ydbqt")
-animation = &"static"
+animation = &"fall"
 
 [node name="Damage" type="Area2D" parent="." groups=["enemy", "enemy_damage"]]
 

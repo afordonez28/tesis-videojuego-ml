@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7d7slqyrqcbj"]
+
+[ext_resource type="Script" uid="uid://dcjqmn0kmd0xm" path="res://Scripts/enemies/spawn_enemy.gd" id="1_efgkh"]
+[ext_resource type="PackedScene" uid="uid://qnvfejiiw0gt" path="res://scenes/rana.tscn" id="2_hqw4b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bib1v"]
+
+[node name="spawn_enemy" type="Area2D"]
+script = ExtResource("1_efgkh")
+enemies = Array[PackedScene]([ExtResource("2_hqw4b"), null])
+probabilities = Array[int]([70, 0])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bib1v")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_rana_timeout"]
