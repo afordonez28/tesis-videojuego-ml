@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://h1oygr7hfq0u"]
+
+[ext_resource type="Script" uid="uid://ct1fku10agbcw" path="res://Scripts/enemies/especiales/enemy_group_manager.gd" id="1_5s3p3"]
+
+[node name="EnemyGroupManager" type="Node2D" unique_id=1329511337]
+script = ExtResource("1_5s3p3")
