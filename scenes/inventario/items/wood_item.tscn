@@ -1,31 +1,31 @@
-[gd_scene format=3 uid="uid://kcg67get4rrt"]
+[gd_scene load_steps=5 format=3 uid="uid://kcg67get4rrt"]
 
-[ext_resource type="Script" uid="uid://bdxkp8s4hf2av" path="res://Scripts/inventario/item_drop.gd" id="1_4jkui"]
+[ext_resource type="Script" uid="uid://bdxkp8s4hf2av" path="res://Scripts/items/item_drop.gd" id="1_4jkui"]
 [ext_resource type="Texture2D" uid="uid://cepeihuesv8xo" path="res://Assets/Recursos/items/wood.png" id="2_8mpnh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8mpnh"]
-radius = 139.99998
+radius = 140.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c3xhm"]
-radius = 159.99998
+radius = 160.0
 
-[node name="wood" type="CharacterBody2D" unique_id=1088285041]
+[node name="wood" type="CharacterBody2D"]
 scale = Vector2(0.05, 0.05)
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_4jkui")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=124240562]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8mpnh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1159289168]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8mpnh")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=304202224]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1728552544]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_c3xhm")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

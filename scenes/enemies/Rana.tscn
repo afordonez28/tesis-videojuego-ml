@@ -1,7 +1,9 @@
-[gd_scene format=3 uid="uid://dllsoxnu13lo5"]
+[gd_scene load_steps=12 format=3 uid="uid://dllsoxnu13lo5"]
 
 [ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/enemies/jumper/rana.gd" id="1_6g8ue"]
 [ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
+[ext_resource type="Texture2D" uid="uid://chbxodniw7xa8" path="res://Assets/enemies/bar_clear.png" id="3_mfmoo"]
+[ext_resource type="Texture2D" uid="uid://bs0cxm6kqvseo" path="res://Assets/enemies/bar_complete.png" id="4_jqeqc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg371"]
 size = Vector2(20, 18)
@@ -51,7 +53,7 @@ size = Vector2(22, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_midvy"]
 size = Vector2(34, 36)
 
-[node name="Rana" type="CharacterBody2D" unique_id=2102863170 groups=["enemy"]]
+[node name="Rana" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_6g8ue")
@@ -59,31 +61,45 @@ extra_speed = 50.0
 enemy_scale = 0.5
 jump_force = -50
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=853016914 groups=["enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_tg371")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444142943]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_ydbqt")
 animation = &"fall"
 
-[node name="Damage" type="Area2D" parent="." unique_id=99025207 groups=["enemy", "enemy_damage"]]
+[node name="Damage" type="Area2D" parent="." groups=["enemy", "enemy_damage"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage" unique_id=319205472]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_6g8ue")
 
-[node name="Timer_damage" type="Timer" parent="." unique_id=49541767]
+[node name="Timer_damage" type="Timer" parent="."]
 wait_time = 0.6
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=425542675]
+[node name="Hurtbox" type="Area2D" parent="."]
 visibility_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1564854150]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_midvy")
+
+[node name="HealthBar" type="Node2D" parent="."]
+
+[node name="BarEmpty" type="Sprite2D" parent="HealthBar"]
+position = Vector2(0, -22)
+texture = ExtResource("3_mfmoo")
+
+[node name="BarFill" type="Sprite2D" parent="HealthBar"]
+position = Vector2(0, -22)
+texture = ExtResource("4_jqeqc")
+
+[node name="DamageNumberSpawner" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]
 [connection signal="body_exited" from="Damage" to="." method="_on_damage_body_exited"]
 [connection signal="timeout" from="Timer_damage" to="." method="_on_timer_damage_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

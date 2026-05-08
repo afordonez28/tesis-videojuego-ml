@@ -1,20 +1,20 @@
-[gd_scene format=3 uid="uid://c7d7slqyrqcbj"]
+[gd_scene load_steps=4 format=3 uid="uid://c7d7slqyrqcbj"]
 
 [ext_resource type="Script" uid="uid://dcjqmn0kmd0xm" path="res://Scripts/enemies/spawn_enemy.gd" id="1_efgkh"]
-[ext_resource type="PackedScene" uid="uid://dg2b2eqnoyyj4" path="res://scenes/enemies/rana.tscn" id="2_hqw4b"]
+[ext_resource type="PackedScene" uid="uid://dllsoxnu13lo5" path="res://scenes/enemies/rana.tscn" id="2_hqw4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bib1v"]
 
-[node name="spawn_enemy" type="Area2D" unique_id=263226657]
+[node name="spawn_enemy" type="Area2D"]
 script = ExtResource("1_efgkh")
 enemies = Array[PackedScene]([ExtResource("2_hqw4b")])
 probabilities = Array[float]([70.0])
 growth = Array[float]([0.0, 0.0])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=949909683]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bib1v")
 
-[node name="RespawnTimer" type="Timer" parent="." unique_id=2066644303]
+[node name="RespawnTimer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

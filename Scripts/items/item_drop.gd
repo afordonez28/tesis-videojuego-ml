@@ -61,8 +61,8 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		collect(body)
 
-func collect(player):
-	var inventory = player.get_node("Inventory")
+func collect(target_player):
+	var inventory = target_player.get_node("Inventory")
 	if inventory:
 		inventory.add_item(item_type, 1)
 	queue_free()

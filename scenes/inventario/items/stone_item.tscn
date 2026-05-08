@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cdl5y3l7vlwe1"]
+[gd_scene load_steps=5 format=3 uid="uid://cdl5y3l7vlwe1"]
 
-[ext_resource type="Script" uid="uid://bdxkp8s4hf2av" path="res://Scripts/inventario/item_drop.gd" id="1_vrrjc"]
+[ext_resource type="Script" uid="uid://bdxkp8s4hf2av" path="res://Scripts/items/item_drop.gd" id="1_vrrjc"]
 [ext_resource type="Texture2D" uid="uid://kvv7ngr1crcn" path="res://Assets/Recursos/items/rock.png" id="2_7wkh5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7wkh5"]
@@ -9,24 +9,24 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6iqgb"]
 radius = 250.0
 
-[node name="stone" type="CharacterBody2D" unique_id=1002861572]
+[node name="stone" type="CharacterBody2D"]
 scale = Vector2(0.02, 0.02)
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_vrrjc")
 item_type = "stone"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=815296043]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7wkh5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=794041403]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7wkh5")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1448834910]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1253279051]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_6iqgb")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

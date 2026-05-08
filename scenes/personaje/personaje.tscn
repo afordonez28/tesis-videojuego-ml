@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://uek7i4gwsnin"]
+[gd_scene load_steps=33 format=3 uid="uid://uek7i4gwsnin"]
 
 [ext_resource type="Script" uid="uid://dbgs1rgs4a80n" path="res://Scripts/personaje/personaje.gd" id="1_xvalt"]
 [ext_resource type="Texture2D" uid="uid://dj00r6cpq3a0h" path="res://Assets/Pixel/Personaje/run.png" id="2_auoqv"]
@@ -205,7 +205,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4e5bt"]
-size = Vector2(15, 24.234694)
+size = Vector2(15, 24.2347)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w6sy"]
 size = Vector2(15, 25.1389)
@@ -213,11 +213,11 @@ size = Vector2(15, 25.1389)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ink26"]
 size = Vector2(54.5, 46.5)
 
-[node name="Player" type="CharacterBody2D" unique_id=629561241 groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_xvalt")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=666208327 groups=["enemy"]]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." groups=["enemy"]]
 offset_left = -211.0
 offset_top = -197.0
 offset_right = -147.0
@@ -229,34 +229,34 @@ texture_under = ExtResource("7_4w6sy")
 texture_over = ExtResource("8_ink26")
 texture_progress = ExtResource("9_rirxc")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=345446571]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, 0)
 sprite_frames = SubResource("SpriteFrames_f8plh")
 animation = &"attack_pickaxe"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=931885330]
-position = Vector2(-0.5, 0.8750002)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.875)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_4e5bt")
 
-[node name="damage" type="Area2D" parent="." unique_id=1859451118 groups=["player"]]
+[node name="damage" type="Area2D" parent="." groups=["player"]]
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" unique_id=690823837 groups=["player"]]
-position = Vector2(-0.5, 0.5694499)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" groups=["player"]]
+position = Vector2(-0.5, 0.56945)
 shape = SubResource("RectangleShape2D_4w6sy")
 
-[node name="hitbox" type="Area2D" parent="." unique_id=1915470184]
+[node name="hitbox" type="Area2D" parent="."]
 
-[node name="Dar daño" type="CollisionShape2D" parent="hitbox" unique_id=1448625057]
+[node name="Dar daño" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(14.75, -9.75)
 shape = SubResource("RectangleShape2D_ink26")
 
-[node name="ToolSprite" type="Sprite2D" parent="." unique_id=1551826414]
+[node name="ToolSprite" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.1, 0.1)
 
-[node name="Inventory" parent="." unique_id=2076435635 instance=ExtResource("10_ink26")]
+[node name="Inventory" parent="." instance=ExtResource("10_ink26")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="damage" to="." method="_on_damage_body_entered"]

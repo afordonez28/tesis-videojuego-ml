@@ -13,8 +13,8 @@ var health: int
 @onready var bar_fill = $HealthBar/BarFill
 @onready var damage_spawner = $DamageNumberSpawner
 
-# escena número daño
 @export var damage_number_scene: PackedScene
+
 
 func _ready():
 	add_to_group("enemy")
@@ -25,15 +25,18 @@ func _ready():
 	
 	update_health_bar()
 
+
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
+
 
 func face_player():
 	if player == null:
 		return
 
 	sprite.flip_h = player.global_position.x < global_position.x
+
 
 func find_nearest_player():
 	var players = get_tree().get_nodes_in_group("player")
@@ -52,9 +55,13 @@ func find_nearest_player():
 
 	return nearest
 
+
 # 🔥 RECIBIR DAÑO
 func take_damage(damage):
 	health -= damage
+	
+	# 📊 MÉTRICAS → empieza combate
+	MetricsManager.register_combat_start()
 	
 	show_damage_number(damage)
 	flash_hit()
@@ -63,16 +70,19 @@ func take_damage(damage):
 	if health <= 0:
 		die()
 
+
 # ❤️ BARRA DE VIDA
 func update_health_bar():
 	var ratio = float(health) / float(max_health)
 	bar_fill.scale.x = ratio
 
-# 🔴 EFECTO GOLPE (como recurso)
+
+# 🔴 EFECTO GOLPE
 func flash_hit():
 	sprite.modulate = Color(1, 0.3, 0.3)
 	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = Color.WHITE
+
 
 # 🔢 NUMERO DE DAÑO
 func show_damage_number(damage):
@@ -85,8 +95,17 @@ func show_damage_number(damage):
 	
 	get_parent().add_child(number)
 
+
+# 💀 MUERTE
 func die():
+	# 📊 MÉTRICAS
+	MetricsManager.enemies_killed += 1
+	MetricsManager.register_combat_end()
+	
 	queue_free()
+	
+	
+
 
 func play_anim(anim):
 	if sprite.animation != anim:

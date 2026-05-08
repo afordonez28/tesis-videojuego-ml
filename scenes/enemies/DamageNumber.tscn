@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqnhva6jllai8"]
+
+[ext_resource type="Script" uid="uid://u4xup03imn66" path="res://Scripts/enemies/Extras/damage_number.gd" id="1_2pbce"]
+
+[node name="DamageNumber" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_2pbce")

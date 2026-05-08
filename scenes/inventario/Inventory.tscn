@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://glhnydqnb0yn"]
+[gd_scene load_steps=7 format=3 uid="uid://glhnydqnb0yn"]
 
-[ext_resource type="Script" uid="uid://d1auxhffffy4" path="res://scripts/inventario/inventory.gd" id="1_e0a1f"]
+[ext_resource type="Script" uid="uid://d1auxhffffy4" path="res://Scripts/inventario/inventory.gd" id="1_e0a1f"]
 [ext_resource type="Texture2D" uid="uid://cepeihuesv8xo" path="res://Assets/Recursos/items/wood.png" id="2_44sln"]
 [ext_resource type="Texture2D" uid="uid://bujistvwdexk" path="res://Assets/Inventario/fondo_inventory.png" id="2_j6pfy"]
 [ext_resource type="Texture2D" uid="uid://kvv7ngr1crcn" path="res://Assets/Recursos/items/rock.png" id="3_j6pfy"]
@@ -10,10 +10,10 @@ texture = ExtResource("2_j6pfy")
 
 [sub_resource type="FontVariation" id="FontVariation_j6pfy"]
 
-[node name="Inventory" type="CanvasLayer" unique_id=2076435635]
+[node name="Inventory" type="CanvasLayer"]
 script = ExtResource("1_e0a1f")
 
-[node name="Panel" type="Panel" parent="." unique_id=1557466478]
+[node name="Panel" type="Panel" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -24,7 +24,7 @@ grow_horizontal = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_kd32f")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1325289883]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -35,18 +35,18 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
-[node name="WoodSlot" type="VBoxContainer" parent="Panel/HBoxContainer" unique_id=275605625]
+[node name="WoodSlot" type="VBoxContainer" parent="Panel/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/WoodSlot" unique_id=130239827]
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/WoodSlot"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_44sln")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/WoodSlot" unique_id=487389684]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/WoodSlot"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_j6pfy")
 theme_override_font_sizes/font_size = 18
@@ -54,18 +54,18 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="StoneSlot" type="VBoxContainer" parent="Panel/HBoxContainer" unique_id=2091014903]
+[node name="StoneSlot" type="VBoxContainer" parent="Panel/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/StoneSlot" unique_id=920675094]
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/StoneSlot"]
 custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 texture = ExtResource("3_j6pfy")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/StoneSlot" unique_id=1539418913]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/StoneSlot"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "0
