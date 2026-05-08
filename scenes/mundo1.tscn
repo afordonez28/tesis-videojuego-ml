@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dis2u8buhri51"]
+
+[ext_resource type="Texture2D" uid="uid://2pg5h36q6ods" path="res://Assets/aseprite/fondo/fondo.png" id="1_ngo62"]
+[ext_resource type="Texture2D" uid="uid://dkcx674legjwb" path="res://Assets/aseprite/fondo/mountain.png" id="2_plc0x"]
+[ext_resource type="Texture2D" uid="uid://boac2k3fl534g" path="res://Assets/aseprite/fondo/tree.png" id="3_526wi"]
+[ext_resource type="Script" uid="uid://ctliugar8tyon" path="res://Scripts/canvas_modulate.gd" id="4_526wi"]
+[ext_resource type="Texture2D" uid="uid://b0vyrw1qtoue5" path="res://Assets/daynightcycle-gradient-texture.tres" id="5_pafas"]
+[ext_resource type="Texture2D" uid="uid://c4h5gibxp10fj" path="res://Assets/aseprite/fondo/azul.png" id="6_pafas"]
+
+[node name="mundo1" type="Node2D"]
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer(clouds" type="ParallaxLayer" parent="ParallaxBackground2"]
+position = Vector2(-480, -275)
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer(clouds"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ngo62")
+centered = false
+
+[node name="ParallaxLayer(mountain" type="ParallaxLayer" parent="ParallaxBackground2"]
+position = Vector2(-480, -256)
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer(mountain"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_plc0x")
+centered = false
+
+[node name="ParallaxLayer(tree" type="ParallaxLayer" parent="ParallaxBackground2"]
+position = Vector2(-480, -256)
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer(tree"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_526wi")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer(tree"]
+position = Vector2(241.562, -238.906)
+scale = Vector2(0.250456, 0.42518)
+texture = ExtResource("6_pafas")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground2"]
+script = ExtResource("4_526wi")
+gradient_texture = ExtResource("5_pafas")

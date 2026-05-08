@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://qnvfejiiw0gt"]
+
+[ext_resource type="Script" uid="uid://cbm3p0n2grcxr" path="res://Scripts/rana.gd" id="1_6g8ue"]
+[ext_resource type="Texture2D" uid="uid://cr70tlj1lbwt6" path="res://Assets/Pixel/Rana/rana salto.png" id="2_midvy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg371"]
+size = Vector2(20, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_midvy"]
+atlas = ExtResource("2_midvy")
+region = Rect2(72, 24, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg371"]
+atlas = ExtResource("2_midvy")
+region = Rect2(36, 22, 34, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g8ue"]
+atlas = ExtResource("2_midvy")
+region = Rect2(0, 22, 36, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydbqt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_midvy")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg371")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g8ue")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g8ue"]
+size = Vector2(22, 20)
+
+[node name="Rana" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_6g8ue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_tg371")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_ydbqt")
+animation = &"static"
+
+[node name="Damage" type="Area2D" parent="." groups=["enemy", "enemy_damage"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_6g8ue")
+
+[node name="Timer_damage" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="body_entered" from="Damage" to="." method="_on_damage_body_entered"]
+[connection signal="body_exited" from="Damage" to="." method="_on_damage_body_exited"]
+[connection signal="timeout" from="Timer_damage" to="." method="_on_timer_damage_timeout"]
