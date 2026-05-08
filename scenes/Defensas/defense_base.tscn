@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b17gt0vvkm7jb"]
+[gd_scene load_steps=8 format=3 uid="uid://b17gt0vvkm7jb"]
 
 [ext_resource type="Script" uid="uid://c7lnp4r4shx2n" path="res://defense_base.gd" id="1_hcq7q"]
 [ext_resource type="Texture2D" uid="uid://dswi23c47fvv3" path="res://Assets/Recursos/recursos/defensa1.png" id="2_f128v"]
@@ -14,48 +14,48 @@ size = Vector2(13, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kygu5"]
 size = Vector2(34, 36)
 
-[node name="Defensa1" type="StaticBody2D" unique_id=416501246]
+[node name="Defensa1" type="StaticBody2D"]
 script = ExtResource("1_hcq7q")
 damage = 100
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1416239290]
-position = Vector2(0.1249997, -0.3749988)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.125, -0.374999)
 scale = Vector2(0.5775, 0.3325)
 texture = ExtResource("2_f128v")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1229310474]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_g1gsk")
 
-[node name="DamageArea" type="Area2D" parent="." unique_id=1648832415]
+[node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1842345033]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_304m2")
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1821671036]
+[node name="Hurtbox" type="Area2D" parent="."]
 visibility_layer = 4
 collision_layer = 64
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1922572405]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_kygu5")
 
-[node name="Timer" type="Timer" parent="." unique_id=1173749318]
+[node name="Timer" type="Timer" parent="."]
 
-[node name="HealthBar" type="Node2D" parent="." unique_id=1354138314]
+[node name="HealthBar" type="Node2D" parent="."]
 
-[node name="BarEmpty" type="Sprite2D" parent="HealthBar" unique_id=895294109]
-position = Vector2(-4, -1.0000019)
-scale = Vector2(0.48828125, 0.7578125)
+[node name="BarEmpty" type="Sprite2D" parent="HealthBar"]
+position = Vector2(-4, -1)
+scale = Vector2(0.488281, 0.757813)
 texture = ExtResource("3_g1gsk")
 
-[node name="BarFill" type="Sprite2D" parent="HealthBar" unique_id=797341154]
-position = Vector2(-3.9999995, -2)
-scale = Vector2(0.48046875, 0.71484375)
+[node name="BarFill" type="Sprite2D" parent="HealthBar"]
+position = Vector2(-4, -2)
+scale = Vector2(0.480469, 0.714844)
 texture = ExtResource("4_304m2")
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

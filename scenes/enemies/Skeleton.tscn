@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://u5gegqpn2ptq"]
+[gd_scene load_steps=27 format=3 uid="uid://u5gegqpn2ptq"]
 
 [ext_resource type="Script" uid="uid://iclpmqdvj8mj" path="res://Scripts/enemies/floor/skeleton.gd" id="1_xt4x6"]
 [ext_resource type="Texture2D" uid="uid://ufl1x78jp2em" path="res://Assets/enemies/esqueleto.png" id="2_05nri"]
@@ -147,7 +147,7 @@ size = Vector2(30.5, 35)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi2il"]
 size = Vector2(34, 36)
 
-[node name="Skeleton" type="CharacterBody2D" unique_id=1015055007]
+[node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_xt4x6")
@@ -157,49 +157,49 @@ knockback_force = 300
 enemy_scale = 2.0
 damage_number_scene = ExtResource("2_owfsc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1655393834 groups=["enemy"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
 position = Vector2(0, -17.25)
 shape = SubResource("RectangleShape2D_owfsc")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2056955324]
-position = Vector2(0.74999785, -17.499998)
-scale = Vector2(0.74218744, 0.7234042)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.749998, -17.5)
+scale = Vector2(0.742187, 0.723404)
 sprite_frames = SubResource("SpriteFrames_swoyg")
 animation = &"hit"
 
-[node name="DamageArea" type="Area2D" parent="." unique_id=1287157829 groups=["enemy", "enemy_damage"]]
+[node name="DamageArea" type="Area2D" parent="." groups=["enemy", "enemy_damage"]]
 collision_layer = 2
 collision_mask = 65
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=317534518]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(4.25, -17.5)
 shape = SubResource("RectangleShape2D_sk5js")
 
-[node name="Timer_damage" type="Timer" parent="." unique_id=1806080957]
+[node name="Timer_damage" type="Timer" parent="."]
 wait_time = 0.6
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=311732199]
+[node name="Hurtbox" type="Area2D" parent="."]
 visibility_layer = 4
 collision_layer = 2
 collision_mask = 65
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=862206053]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_fi2il")
 
-[node name="HealthBar" type="Node2D" parent="." unique_id=1079975554]
+[node name="HealthBar" type="Node2D" parent="."]
 
-[node name="BarEmpty" type="Sprite2D" parent="HealthBar" unique_id=583486266]
-position = Vector2(0.6249995, -24.250002)
-scale = Vector2(0.48828125, 0.7578125)
+[node name="BarEmpty" type="Sprite2D" parent="HealthBar"]
+position = Vector2(0.625, -24.25)
+scale = Vector2(0.488281, 0.757813)
 texture = ExtResource("2_xt4x6")
 
-[node name="BarFill" type="Sprite2D" parent="HealthBar" unique_id=699810862]
-position = Vector2(0.6249995, -25.124998)
-scale = Vector2(0.48046875, 0.71484375)
+[node name="BarFill" type="Sprite2D" parent="HealthBar"]
+position = Vector2(0.625, -25.125)
+scale = Vector2(0.480469, 0.714844)
 texture = ExtResource("3_05nri")
 
-[node name="DamageNumberSpawner" type="Node2D" parent="." unique_id=1486062427]
+[node name="DamageNumberSpawner" type="Node2D" parent="."]
 visible = false
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_body_entered"]

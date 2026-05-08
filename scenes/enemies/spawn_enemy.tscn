@@ -1,20 +1,20 @@
-[gd_scene format=3 uid="uid://c7d7slqyrqcbj"]
+[gd_scene load_steps=4 format=3 uid="uid://c7d7slqyrqcbj"]
 
 [ext_resource type="Script" uid="uid://dcjqmn0kmd0xm" path="res://Scripts/enemies/spawn_enemy.gd" id="1_efgkh"]
 [ext_resource type="PackedScene" uid="uid://h1oygr7hfq0u" path="res://scenes/systems/EnemyGroupManager.tscn" id="2_bfj1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bib1v"]
 
-[node name="spawn_enemy" type="Area2D" unique_id=384203986]
+[node name="spawn_enemy" type="Area2D"]
 script = ExtResource("1_efgkh")
 
-[node name="EnemyGroupManager" parent="." unique_id=1329511337 instance=ExtResource("2_bfj1v")]
+[node name="EnemyGroupManager" parent="." instance=ExtResource("2_bfj1v")]
 max_group_size = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=190106482]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bib1v")
 
-[node name="RespawnTimer" type="Timer" parent="." unique_id=2108263328]
+[node name="RespawnTimer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

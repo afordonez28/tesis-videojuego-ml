@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://uek7i4gwsnin"]
+[gd_scene load_steps=82 format=3 uid="uid://uek7i4gwsnin"]
 
 [ext_resource type="Script" uid="uid://dbgs1rgs4a80n" path="res://Scripts/personaje/personaje.gd" id="1_xvalt"]
 [ext_resource type="Texture2D" uid="uid://dj00r6cpq3a0h" path="res://Assets/Pixel/Personaje/run.png" id="2_auoqv"]
@@ -557,7 +557,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4e5bt"]
-size = Vector2(10, 23.122448)
+size = Vector2(10, 23.1224)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w6sy"]
 size = Vector2(8, 20)
@@ -565,79 +565,79 @@ size = Vector2(8, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ink26"]
 size = Vector2(69, 33)
 
-[node name="Player" type="CharacterBody2D" unique_id=164165333 groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_xvalt")
 defense_scene = ExtResource("2_yub3r")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1524177105]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=22189470]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer" unique_id=68802845]
+[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 
-[node name="DamageRow" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=1641853218]
+[node name="DamageRow" type="HBoxContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 
-[node name="IconDamage" type="TextureRect" parent="UI/VBoxContainer/DamageRow" unique_id=2000777530]
+[node name="IconDamage" type="TextureRect" parent="UI/VBoxContainer/DamageRow"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 texture = ExtResource("5_k5wo3")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="DamageLabel" type="Label" parent="UI/VBoxContainer/DamageRow" unique_id=1688320489]
+[node name="DamageLabel" type="Label" parent="UI/VBoxContainer/DamageRow"]
 layout_mode = 2
 
-[node name="SpeedRow" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=1920212738]
+[node name="SpeedRow" type="HBoxContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 
-[node name="IconSpeed" type="TextureRect" parent="UI/VBoxContainer/SpeedRow" unique_id=1180255131]
+[node name="IconSpeed" type="TextureRect" parent="UI/VBoxContainer/SpeedRow"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 texture = ExtResource("6_yub3r")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="SpeedLabel" type="Label" parent="UI/VBoxContainer/SpeedRow" unique_id=1635681348]
+[node name="SpeedLabel" type="Label" parent="UI/VBoxContainer/SpeedRow"]
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2137276885]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, -7)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_f8plh")
 animation = &"die"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=152850756]
-position = Vector2(-3, -7.4387755)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -7.43878)
 shape = SubResource("RectangleShape2D_4e5bt")
 
-[node name="damage" type="Area2D" parent="." unique_id=1687809002 groups=["player"]]
+[node name="damage" type="Area2D" parent="." groups=["player"]]
 collision_mask = 66
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" unique_id=562123924 groups=["player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage" groups=["player"]]
 position = Vector2(-3, -7)
 shape = SubResource("RectangleShape2D_4w6sy")
 
-[node name="hitbox" type="Area2D" parent="." unique_id=1956905162]
+[node name="hitbox" type="Area2D" parent="."]
 collision_mask = 82
 
-[node name="Dar daño" type="CollisionShape2D" parent="hitbox" unique_id=1842709642]
+[node name="Dar daño" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(8.5, -12)
 shape = SubResource("RectangleShape2D_ink26")
 
-[node name="Inventory" parent="." unique_id=1070704130 instance=ExtResource("10_ink26")]
+[node name="Inventory" parent="." instance=ExtResource("10_ink26")]
 
-[node name="UI2" type="CanvasLayer" parent="." unique_id=1864779918]
+[node name="UI2" type="CanvasLayer" parent="."]
 scale = Vector2(3, 3)
 transform = Transform2D(3, 0, 0, 3, 0, 0)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI2" unique_id=2133044275 groups=["enemy"]]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI2" groups=["enemy"]]
 custom_minimum_size = Vector2(25, 50)
 size_flags_horizontal = 0
 size_flags_vertical = 0
